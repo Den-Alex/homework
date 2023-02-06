@@ -5,6 +5,7 @@
 }
 
 .error {
+
 }
 
 .input {
@@ -14,9 +15,11 @@
 }
 
 .errorInput {
+    border: red 1px solid;
 }
 
 .button {
+    padding-left: 50px;
 }
 
 .button:focus {
