@@ -19,15 +19,15 @@ import GreetingContainer from './GreetingContainer'
 
 // types
 export type UserType = {
-    _id: number // need to fix any
+    _id: string // need to fix any
     name: string // need to fix any
 }
 
 export const pureAddUserCallback = (name: string, setUsers: (users: Array<UserType>) => void, users: Array<UserType>) => { // need to fix any
-    const user = {_id: 1, name: name}
+    const user = {_id: v1(), name}
     setUsers([...users, user])
 
-    // console.log(name)
+    console.log(name)
 }
 
 const HW3 = () => {

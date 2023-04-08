@@ -26,7 +26,7 @@ const Greeting: React.FC<GreetingPropsType> = (
         lastUserName,
     } // деструктуризация пропсов
 ) => {
-    const inputClass = s.errorInput ? s.errorInput : s.input // need to fix with (?:)
+    const inputClass = error ? s.errorInput  : s.input // need to fix with (?:)
 
     return (
         <div id={'hw3-form'} className={s.greetingForm}>
@@ -52,20 +52,21 @@ const Greeting: React.FC<GreetingPropsType> = (
                     </div>
                 </div>
 
-                <button
-                    id={'hw3-button'}
-                    onClick={addUser}
-                    className={s.button}
-                    disabled={!name.trim()}
-                >
-                    Kick me
-                </button>
+                    <button
+                        id={'hw3-button'}
+                        onClick={addUser}
+                        className={s.button}
+                        disabled={!name.trim()}
+                    >
+                        Kick me
+                    </button>
+
             </div>
 
 
             {lastUserName && (
                 <div className={s.greeting}>
-                    Привет <span id={'hw3-last-user'}>{name}</span>!
+                    Привет <span id={'hw3-last-user'}>{lastUserName}</span>!
                 </div>
             )}
         </div>
