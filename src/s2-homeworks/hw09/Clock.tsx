@@ -36,15 +36,15 @@ function Clock() {
         setShow(false)
     }
 
-    // const stringTime = '23:40:25' || <br/> // часы24:минуты:секунды (01:02:03)/(23:02:03)/(24:00:00)/(00:00:01) // пишут студенты
-    // const stringTime = new Intl.DateTimeFormat([locales, [options]]) || <br/>                // часы24:минуты:секунды (01:02:03)/(23:02:03)/(24:00:00)/(00:00:01) // пишут студенты
-    const stringTime = date.toLocaleTimeString() || <br/>                // часы24:минуты:секунды (01:02:03)/(23:02:03)/(24:00:00)/(00:00:01) // пишут студенты
-    const stringDate = date.toLocaleDateString() || <br/> // день.месяц.год (01.02.2022) // пишут студенты, варианты 01.02.0123/01.02.-123/01.02.12345 не рассматриваем
-    // const stringDate = '07.04.2023' || <br/> // день.месяц.год (01.02.2022) // пишут студенты, варианты 01.02.0123/01.02.-123/01.02.12345 не рассматриваем
+
+    const stringTime = date.toLocaleTimeString('ru-Ru') || <br/>                // часы24:минуты:секунды (01:02:03)/(23:02:03)/(24:00:00)/(00:00:01) // пишут студенты
+    // const stringDate = date.toLocaleDateString() || <br/> // день.месяц.год (01.02.2022) // пишут студенты, варианты 01.02.0123/01.02.-123/01.02.12345 не рассматриваем
+    const stringDate = '08.04.2023' || <br/> // день.месяц.год (01.02.2022) // пишут студенты, варианты 01.02.0123/01.02.-123/01.02.12345 не рассматриваем
+
 
     // день недели на английском, месяц на английском (https://learn.javascript.ru/intl#intl-datetimeformat)
     // const stringDay = 'date.toLocaleDateString()' || <br/> // пишут студенты
-    const stringDay = 'Friday' || <br/> // пишут студенты
+    const stringDay = 'Saturday' || <br/> // пишут студенты
     // const stringDay = new Intl.DateTimeFormat([locales, [date]]) || <br/> // пишут студенты
     const stringMonth = 'April' || <br/> // пишут студенты
 

@@ -53,9 +53,10 @@ const SuperEditableSpan: React.FC<SuperEditableSpanType> = (
     const onDoubleClickCallBack = (
         e: React.MouseEvent<HTMLSpanElement, MouseEvent>
     ) => {
+        setEditMode(true)
         onDoubleClick?.(e)
         // включить editMode при двойном клике // делают студенты
-        setEditMode(true)
+
 
     }
 
