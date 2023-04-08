@@ -20,12 +20,15 @@ const HW13 = () => {
     const [info, setInfo] = useState('')
     const [image, setImage] = useState('')
 
+    const [isLoading, setIsLoading] = useState(false);
+
+
     const send = (x?: boolean | null) => () => {
         const url =
             x === null
                 ? 'https://xxxxxx.ccc' // имитация запроса на не корректный адрес
-                : 'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test'
-
+                : 'https://samurai.it-incubator.io/api/3.0'
+        setIsLoading(true);
         setCode('')
         setImage('')
         setText('')
@@ -34,16 +37,38 @@ const HW13 = () => {
         axios
             .post(url, {success: x})
             .then((res) => {
-                setCode('Код 200!')
-                setImage(success200)
-                // дописать
-
+                setIsLoading(false);
+                if (x === true) {
+                    setCode(res.data.errorText);
+                    setText(res.data.info);
+                    setInfo('Success!');
+                    setImage(success200);
+                } else if (x === false) {
+                    setCode(res.data.errorText);
+                    setText(res.data.info);
+                    setInfo('Error 400');
+                    setImage(error400);
+                } else {
+                    setCode(res.status.toString());
+                    setText(res.statusText);
+                    setInfo('Error 500');
+                    setImage(error500);
+                }
             })
             .catch((e) => {
-                // дописать
-
-            })
+                setIsLoading(false);
+                setCode(e.message);
+                setText('');
+                setInfo('Error');
+                setImage(errorUnknown);
+            });
     }
+    // При нажатии на onClick={send(true)} должен отобразиться success200 from './images/200.svg',
+    // При нажатии на onClick={send(false)} должен отобразиться error400 from './images/400.svg',
+    // При нажатии на onClick={send(undefined)} должен отобразиться error500 from './images/500.svg',
+    // При нажатии на onClick={send(null)} должен отобразиться errorUnknown from './images/error.svg',
+    //
+
 
     return (
         <div id={'hw13'}>
@@ -55,6 +80,7 @@ const HW13 = () => {
                         id={'hw13-send-true'}
                         onClick={send(true)}
                         xType={'secondary'}
+                        disabled={isLoading}
                         // дописать
 
                     >
