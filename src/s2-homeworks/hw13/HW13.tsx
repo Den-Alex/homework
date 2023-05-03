@@ -24,45 +24,51 @@ const HW13 = () => {
 
 
     const send = (x?: boolean | null) => () => {
+        setIsLoading(true);
         const url =
             x === null
                 ? 'https://xxxxxx.ccc' // имитация запроса на не корректный адрес
-                : 'https://samurai.it-incubator.io/api/3.0'
-        setIsLoading(true);
+                // : 'https://samurai.it-incubator.io/api/3.0'
+                : 'https://samurai.it-incubator.io/api/3.0/homework/test'
         setCode('')
         setImage('')
         setText('')
         setInfo('...loading')
 
+
         axios
             .post(url, {success: x})
             .then((res) => {
                 setIsLoading(false);
-                if (x === true) {
-                    setCode(res.data.errorText);
-                    setText(res.data.info);
-                    setInfo('Success!');
+                if (res.status === 200) {
+                    setCode('Код 200!');
                     setImage(success200);
-                } else if (x === false) {
-                    setCode(res.data.errorText);
-                    setText(res.data.info);
-                    setInfo('Error 400');
-                    setImage(error400);
-                } else {
-                    setCode(res.status.toString());
-                    setText(res.statusText);
-                    setInfo('Error 500');
-                    setImage(error500);
+                    setText('Success!');
+                    setInfo('');
                 }
             })
             .catch((e) => {
                 setIsLoading(false);
-                setCode(e.message);
-                setText('');
-                setInfo('Error');
-                setImage(errorUnknown);
+                if (e.response && e.response.status === 400) {
+                    setCode('Код 400!');
+                    setImage(error400);
+                    setText('Bad Request!');
+                    setInfo('');
+                } else if (e.response && e.response.status === 500) {
+                    setCode('Код 500!');
+                    setImage(error500);
+                    setText('Server Error!');
+                    setInfo('');
+                } else {
+                    setCode('Код неизвестен!');
+                    setImage(errorUnknown);
+                    setText('Unknown Error!');
+                    setInfo('');
+                }
             });
     }
+
+
     // При нажатии на onClick={send(true)} должен отобразиться success200 from './images/200.svg',
     // При нажатии на onClick={send(false)} должен отобразиться error400 from './images/400.svg',
     // При нажатии на onClick={send(undefined)} должен отобразиться error500 from './images/500.svg',
@@ -80,7 +86,7 @@ const HW13 = () => {
                         id={'hw13-send-true'}
                         onClick={send(true)}
                         xType={'secondary'}
-                        disabled={isLoading}
+                        // disabled={isLoading}
                         // дописать
 
                     >
