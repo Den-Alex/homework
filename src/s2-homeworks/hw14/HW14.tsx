@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import s2 from '../../s1-main/App.module.css'
 import s from './HW14.module.css'
-import axios from 'axios'
+import axios, {AxiosResponse} from 'axios'
 import SuperDebouncedInput from './common/c8-SuperDebouncedInput/SuperDebouncedInput'
 import {useSearchParams} from 'react-router-dom'
 
@@ -16,7 +16,7 @@ import {useSearchParams} from 'react-router-dom'
 const getTechs = (find: string) => {
     return axios
         .get<{ techs: string[] }>(
-            'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test2',
+            'https://samurai.it-incubator.io/api/3.0/homework/test2',
             {params: {find}}
         )
         .catch((e) => {
@@ -34,16 +34,20 @@ const HW14 = () => {
         setLoading(true)
         getTechs(value)
             .then((res) => {
-                // делает студент
-
-                // сохранить пришедшие данные
-
-                //
+                if (res && res.data) { // проверка на наличие данных
+                    setTechs(res.data.techs); // установить новые технологии в стейт
+                } // установить новые технологии в стейт
+                setLoading(false);
             })
+            .catch((e) => {
+                alert(e.response?.data?.errorText || e.message);
+                setLoading(false);
+            });
     }
 
     const onChangeText = (value: string) => {
         setFind(value)
+        setSearchParams({ find: value })
         // делает студент
 
         // добавить/заменить значение в квери урла
