@@ -16,7 +16,7 @@ type SuperSelectPropsType = DefaultSelectPropsType & {
     // change?: (id: number) => void
 }
 
-const SuperSelect: React.FC<SuperSelectPropsType> = ({
+const   SuperSelect: React.FC<SuperSelectPropsType> = ({
     options,
     className,
     onChange,

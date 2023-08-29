@@ -59,7 +59,7 @@ const HW15 = () => {
     //         })
     // }
 
-    const sendQuery = (params: ParamsType) => {
+    const sendQuery = (params: any) => {
         setLoading(true);
         getTechs(params)
             .then((res) => {
